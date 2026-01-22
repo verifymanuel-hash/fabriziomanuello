@@ -7,10 +7,11 @@ const POSTS_COLLECTION = 'posts'
 // GET single post
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   try {
-    const postRef = doc(db, POSTS_COLLECTION, params.id)
+    const postRef = doc(db, POSTS_COLLECTION, id)
     const snapshot = await getDoc(postRef)
 
     if (!snapshot.exists()) {
@@ -30,11 +31,12 @@ export async function GET(
 // PUT update post
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   try {
     const body = await request.json()
-    const postRef = doc(db, POSTS_COLLECTION, params.id)
+    const postRef = doc(db, POSTS_COLLECTION, id)
 
     const updates = {
       ...body,
@@ -52,10 +54,11 @@ export async function PUT(
 // DELETE post
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   try {
-    const postRef = doc(db, POSTS_COLLECTION, params.id)
+    const postRef = doc(db, POSTS_COLLECTION, id)
     await deleteDoc(postRef)
     return NextResponse.json({ success: true })
   } catch (error) {
