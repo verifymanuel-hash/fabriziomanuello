@@ -1,10 +1,12 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { use } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 
-export default function PostPage({ params }: { params: { slug: string } }) {
+export default function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params)
   const [post, setPost] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [liked, setLiked] = useState(false)
@@ -15,7 +17,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
         // Search through posts to find matching slug
         const res = await fetch('/api/posts?limit=100')
         const data = await res.json()
-        const foundPost = data.posts?.find((p: any) => p.slug === params.slug)
+        const foundPost = data.posts?.find((p: any) => p.slug === slug)
         
         if (foundPost) {
           setPost(foundPost)
@@ -38,7 +40,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
     }
 
     loadPost()
-  }, [params.slug])
+  }, [slug])
 
   const handleLike = async () => {
     if (!post || liked) return
