@@ -1,5 +1,5 @@
 import { db } from './firebase'
-import { collection, query, where, orderBy, limit, getDocs, doc, getDoc, setDoc, updateDoc, deleteDoc, increment } from 'firebase/firestore'
+import { collection, query, where, orderBy, limit, getDocs, doc, getDoc, setDoc, updateDoc, deleteDoc, increment, addDoc } from 'firebase/firestore'
 import { BlogPost, Analytics } from './types'
 
 const POSTS_COLLECTION = 'posts'
@@ -55,7 +55,7 @@ export const createPost = async (post: Omit<BlogPost, 'id' | 'createdAt' | 'upda
       views: 0,
       likes: 0,
     }
-    const docRef = await setDoc(doc(collection(db, POSTS_COLLECTION)), newPost)
+    const docRef = await addDoc(collection(db, POSTS_COLLECTION), newPost)
     return { id: docRef.id, ...newPost }
   } catch (error) {
     console.error('Error creating post:', error)
