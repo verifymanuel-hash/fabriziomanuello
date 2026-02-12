@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: fabriziomanuello
+    runtime: node
+    plan: standard
+    buildCommand: npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 18.17.0
+    autoDeploy: true
+    healthCheck:
+      path: /
+      protocol: http
+    maxShutdownDelay: 30
