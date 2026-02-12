@@ -33,18 +33,20 @@ export const Hero = () => {
     <motion.section
       className="relative w-full text-white overflow-hidden pt-20 sm:pt-32 md:pt-44 lg:pt-56 pb-0"
       initial={{ y: -150, opacity: 0 }}
-      animate={{ y: showHero ? 0 : 0, opacity: 1 }}
+      animate={{ 
+        y: showHero ? 0 : 0,
+        opacity: hideBackground ? 0 : 1
+      }}
       transition={{ 
-        type: 'spring',
-        stiffness: 50,
-        damping: 30,
-        duration: 1.5,
+        type: hideBackground ? 'tween' : 'spring',
+        stiffness: hideBackground ? undefined : 50,
+        damping: hideBackground ? undefined : 30,
+        duration: hideBackground ? 2 : 1.5,
+        ease: hideBackground ? 'easeInOut' : undefined,
       }}
       style={{ 
         overflow: 'hidden',
       }}
-      animate={{ opacity: hideBackground ? 0 : 1 }}
-      transition={{ duration: 2, ease: 'easeInOut' }}
     >
       {/* Animated Background - Vanish with opacity */}
       <motion.div
