@@ -1,0 +1,35 @@
+{
+  "name": "manuello-blog",
+  "version": "1.0.0",
+  "description": "Fabrizio Manuello - International Blog Platform",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "next": "^15.0.0",
+    "firebase": "^10.7.0",
+    "firebase-admin": "^12.0.0",
+    "chart.js": "^4.4.1",
+    "react-chartjs-2": "^5.2.0",
+    "axios": "^1.6.2",
+    "framer-motion": "^10.16.16",
+    "clsx": "^2.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.32",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.55.0",
+    "eslint-config-next": "^15.0.0",
+    "@types/node": "^20.10.5",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18"
+  }
+}
